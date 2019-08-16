@@ -1,0 +1,35 @@
+version: "3"
+services:
+  database:
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: secret
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"
+    restart: always
+    # environment:
+    #   MONGO_INITDB_ROOT_USERNAME: docker
+    #   MONGO_INITDB_ROOT_PASSWORD: secret
+    volumes:
+      - mongodata:/data/db
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+    restart: always
+    # environment:
+    #   MONGO_INITDB_ROOT_USERNAME: docker
+    #   MONGO_INITDB_ROOT_PASSWORD: secret
+    volumes:
+      - redisdata:/data
+volumes:
+  pgdata:
+  mongodata:
+  redisdata:
